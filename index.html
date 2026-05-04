@@ -1,39 +1,193 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Bien joué 😂</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #111;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
-        .container {
-            max-width: 600px;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        p {
-            font-size: 1.2rem;
-            color: #ccc;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bien joué 😂</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #050505;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 25px;
+    }
+
+    .container {
+      max-width: 900px;
+    }
+
+    .glitch {
+      position: relative;
+      font-size: clamp(2.4rem, 9vw, 5.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.05;
+      letter-spacing: 2px;
+      animation: glitch-skew 1s infinite linear alternate-reverse;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      background: #050505;
+    }
+
+    .glitch::before {
+      left: 3px;
+      text-shadow: -3px 0 red;
+      animation: glitch-1 0.7s infinite linear alternate-reverse;
+    }
+
+    .glitch::after {
+      left: -3px;
+      text-shadow: 3px 0 cyan;
+      animation: glitch-2 0.8s infinite linear alternate-reverse;
+    }
+
+    .subtitle {
+      margin-top: 30px;
+      font-size: clamp(1.3rem, 5vw, 2rem);
+      color: #ddd;
+      font-weight: bold;
+    }
+
+    .warning {
+      margin-top: 18px;
+      font-size: clamp(1rem, 4vw, 1.4rem);
+      color: #aaa;
+    }
+
+    .btn {
+      margin-top: 35px;
+      background: #ff0000;
+      color: white;
+      border: none;
+      padding: 20px 45px;
+      font-size: clamp(1.2rem, 4vw, 1.7rem);
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.7);
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: scale(1.08);
+      background: #cc0000;
+    }
+
+    .message {
+      margin-top: 30px;
+      font-size: clamp(1.8rem, 7vw, 3.5rem);
+      color: red;
+      font-weight: 900;
+      display: none;
+      text-transform: uppercase;
+      animation: glitch-skew 0.4s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-1 {
+      0% { clip-path: inset(10% 0 80% 0); }
+      20% { clip-path: inset(30% 0 45% 0); }
+      40% { clip-path: inset(60% 0 20% 0); }
+      60% { clip-path: inset(15% 0 60% 0); }
+      80% { clip-path: inset(75% 0 5% 0); }
+      100% { clip-path: inset(40% 0 35% 0); }
+    }
+
+    @keyframes glitch-2 {
+      0% { clip-path: inset(70% 0 10% 0); }
+      20% { clip-path: inset(15% 0 65% 0); }
+      40% { clip-path: inset(45% 0 30% 0); }
+      60% { clip-path: inset(80% 0 5% 0); }
+      80% { clip-path: inset(25% 0 50% 0); }
+      100% { clip-path: inset(55% 0 20% 0); }
+    }
+
+    @keyframes glitch-skew {
+      0% { transform: skew(0deg); }
+      20% { transform: skew(1deg); }
+      40% { transform: skew(-1deg); }
+      60% { transform: skew(0.5deg); }
+      80% { transform: skew(-0.5deg); }
+      100% { transform: skew(0deg); }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 18px;
+      }
+
+      .glitch {
+        font-size: 2.7rem;
+      }
+
+      .subtitle {
+        font-size: 1.5rem;
+      }
+
+      .warning {
+        font-size: 1.1rem;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 18px 20px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>MDR t’as appuyé sur un lien sans savoir où il redirige 😆</h1>
-        <p>Guignolo 😂</p>
-        <p>Morale : réfléchis avant de cliquer sur n’importe quoi.</p>
+  <div class="container">
+    <h1 class="glitch" data-text="MDR t’as cliqué">MDR t’as cliqué</h1>
+
+    <p class="subtitle">
+      sur un lien sans savoir où il redirigeait, guignolo 😂
+    </p>
+
+    <p class="warning">
+      Moralité : ne clique pas sur n’importe quoi.
+    </p>
+
+    <button class="btn" onclick="prank()">
+      🚪 Quitter la page
+    </button>
+
+    <div class="message" id="msg">
+      T’as encore appuyé 😂
     </div>
+  </div>
+
+  <audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function prank() {
+      const audio = document.getElementById("music");
+      const msg = document.getElementById("msg");
+
+      audio.play();
+      msg.style.display = "block";
+    }
+  </script>
 </body>
 </html>
